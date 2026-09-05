@@ -2,8 +2,9 @@
   "framework": null,
   "outputDirectory": "public",
   "rewrites": [
-    { "source": "/host", "destination": "/host.html" },
-    { "source": "/",     "destination": "/index.html" }
+    { "source": "/host",           "destination": "/host.html"  },
+    { "source": "/join/:sessionId","destination": "/join.html"  },
+    { "source": "/",               "destination": "/index.html" }
   ],
   "headers": [
     {

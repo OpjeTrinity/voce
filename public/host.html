@@ -3,27 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="VOCE CLUSTER — Host Orchestrator Dashboard. Distributed Bio-Kinetic Compiler Control Panel." />
   <meta name="robots" content="noindex, nofollow" />
-
   <title>VOCE CLUSTER — HOST ORCHESTRATOR v2.0.26</title>
 
-  <!-- Preconnect for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
   <link rel="stylesheet" href="/css/host.css" />
 
-  <!--
-    ╔══════════════════════════════════════════════════════════╗
-    ║  PUSHER CONFIGURATION                                    ║
-    ║  Replace with your actual Pusher App Key and Cluster    ║
-    ╚══════════════════════════════════════════════════════════╝
-  -->
   <script>
     window.VOCE_CONFIG = {
-      pusherKey:     '47e151f45ca4133666d8',     // ← Replace this
-      pusherCluster: 'ap2', // ← e.g. 'ap2', 'eu', 'us2'
+      pusherKey:     '47e151f45ca4133666d8',
+      pusherCluster: 'ap2',
     };
   </script>
 </head>
@@ -31,29 +21,26 @@
 
 <div id="app">
 
-  <!-- ─── Header ─────────────────────────────────────────────────────── -->
+  <!-- ─── Header ──────────────────────────────────────────────────── -->
   <header id="header">
     <span id="header-badge">LIVE</span>
-    <span id="header-title">VOCE CLUSTER — DISTRIBUTED BIO-KINETIC COMPILATION ENGINE v2.0.26</span>
+    <span id="header-title">VOCE CLUSTER — BIO-KINETIC PYTHON COMPILATION ENGINE v2.0.26</span>
     <span id="header-time">00:00:00</span>
     <span id="header-status-dot"></span>
   </header>
 
-  <!-- ─── Main Panel ─────────────────────────────────────────────────── -->
+  <!-- ─── Main Panel ──────────────────────────────────────────────── -->
   <main id="main">
 
-    <!-- ── Progress Section ─────────────────────────────────────────── -->
+    <!-- Progress bar -->
     <section id="progress-section">
       <div id="progress-label">
-        <span id="progress-label-text">COMPILATION PROGRESS — LLVM → RUSTC → BINARY</span>
+        <span id="progress-label-text">COMPILATION PROGRESS — LLVM → CUDA → ELF BINARY</span>
         <span id="progress-pct">0.0%</span>
       </div>
-
       <div id="progress-track">
-        <div id="progress-fill" style="width: 0%;"></div>
+        <div id="progress-fill" style="width:0%;"></div>
       </div>
-
-      <!-- 20 tick marks -->
       <div id="progress-ticks">
         <span></span><span></span><span></span><span></span><span></span>
         <span></span><span></span><span></span><span></span><span></span>
@@ -62,14 +49,34 @@
       </div>
     </section>
 
-    <!-- ── Status Block ──────────────────────────────────────────────── -->
+    <!-- Status block -->
     <div id="status-block">
       <div id="status-phase">CURRENT PHASE</div>
-      <div id="status-message">INITIALIZING LLVM IR BACKEND</div>
-      <div id="status-sub">Loading bitcode modules into memory...</div>
+      <div id="status-message">AWAITING COMPILE TRIGGER</div>
+      <div id="status-sub">Link audience nodes via QR, then press START COMPILE</div>
     </div>
 
-    <!-- ── Metrics Row ───────────────────────────────────────────────── -->
+    <!-- Start button -->
+    <div style="display:flex; justify-content:center;">
+      <button id="start-compile-btn" style="
+        background: linear-gradient(135deg, #1a4a1a 0%, #3fb950 100%);
+        color: #05080c;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        border: none;
+        border-radius: 6px;
+        padding: 14px 32px;
+        cursor: pointer;
+        transition: opacity 200ms, transform 150ms;
+        box-shadow: 0 4px 20px rgba(63,185,80,0.3);
+      ">
+        ▶ START COMPILE
+      </button>
+    </div>
+
+    <!-- Metrics row -->
     <div id="metrics-row">
       <div class="metric-card">
         <div class="metric-label">Active Nodes</div>
@@ -82,19 +89,19 @@
         <div class="metric-unit">normalized amplitude</div>
       </div>
       <div class="metric-card">
-        <div class="metric-label">Compile Velocity</div>
-        <div class="metric-value yellow" id="metric-speed">+0.00</div>
-        <div class="metric-unit">%/tick · 30FPS</div>
+        <div class="metric-label">Line Delay</div>
+        <div class="metric-value yellow" id="metric-delay">3.00s</div>
+        <div class="metric-unit">scream to reduce</div>
       </div>
     </div>
 
-    <!-- ── Acoustic Energy Gauge ─────────────────────────────────────── -->
+    <!-- Acoustic gauge -->
     <div id="acoustic-section">
       <div id="acoustic-label">
         <span>AGGREGATE ACOUSTIC PRESSURE</span>
         <span>
           <span id="acoustic-value">0</span>
-          <span style="color: var(--text-muted); font-size:10px;"> / 150 threshold</span>
+          <span style="color:var(--text-muted);font-size:10px;"> / 120 bottleneck release</span>
         </span>
       </div>
       <div id="acoustic-track">
@@ -102,53 +109,53 @@
       </div>
     </div>
 
-  </main><!-- /#main -->
+  </main>
 
-  <!-- ─── Log Panel ─────────────────────────────────────────────────── -->
-  <div id="log">
-    <div id="log-header">SYSTEM LOG — VOCE ENGINE OUTPUT</div>
-    <div id="log-entries">
-      <!-- Log entries injected by host-engine.js -->
+  <!-- ─── Terminal Output ──────────────────────────────────────────── -->
+  <div id="terminal-panel">
+    <div id="terminal-header">
+      <span id="terminal-title">● COMPILER OUTPUT — voce_engine compile</span>
+      <span id="terminal-lines-count">0 lines</span>
+    </div>
+    <div id="terminal-body">
+      <!-- Compile log lines injected by host-engine.js -->
+      <div class="term-line term-dim">Waiting for compilation to start...</div>
+    </div>
+    <div id="terminal-cursor-row">
+      <span id="terminal-cursor">█</span>
     </div>
   </div>
 
-  <!-- ─── Sidebar ───────────────────────────────────────────────────── -->
+  <!-- ─── Sidebar ──────────────────────────────────────────────────── -->
   <aside id="sidebar">
 
-    <!-- QR Code Section -->
     <div class="sidebar-section">
       <div class="sidebar-title">Audience Link</div>
       <div id="qr-wrapper">
-        <div id="qr-canvas-container">
-          <!-- QR code generated by host-engine.js via QRCode.js -->
-        </div>
-        <div id="qr-url">—</div>
+        <div id="qr-canvas-container"></div>
+        <div id="qr-url">Generating session...</div>
       </div>
     </div>
 
-    <!-- Node Count Section -->
     <div class="sidebar-section">
       <div class="sidebar-title">Connected Nodes</div>
       <div id="node-count-display">
         <div id="node-count-number">0</div>
         <div id="node-count-unit">nodes online</div>
       </div>
-      <div id="node-list">
-        <!-- Node pips rendered by host-engine.js -->
-      </div>
+      <div id="node-list"></div>
     </div>
 
-    <!-- Failsafe Keybinds -->
     <div class="sidebar-section">
       <div class="sidebar-title">Stage Failsafes</div>
       <div id="keybinds">
         <div class="keybind-row">
           <span class="keybind-key">SPACE / →</span>
-          <span class="keybind-desc">+5% progress</span>
+          <span class="keybind-desc">Skip 8 lines</span>
         </div>
         <div class="keybind-row">
           <span class="keybind-key">R</span>
-          <span class="keybind-desc">Force 100% + drop</span>
+          <span class="keybind-desc">Force finish + drop</span>
         </div>
         <div class="keybind-row">
           <span class="keybind-key">ESC</span>
@@ -157,68 +164,48 @@
       </div>
     </div>
 
-    <!-- System Info -->
     <div class="sidebar-section" style="flex:1;">
+      <div class="sidebar-title">System Log</div>
+      <div id="log-entries"></div>
+    </div>
+
+    <div class="sidebar-section">
       <div class="sidebar-title">BKD Theory</div>
-      <div style="font-size:10px; color:var(--text-muted); line-height:1.7;">
+      <div style="font-size:10px;color:var(--text-muted);line-height:1.7;">
         Biological Kinetic Dissipation™ leverages
         directed sound pressure waves from human
-        vocal cords to remediate L3 silicon thermal
-        throttling events in LLVM compilation pipelines.
+        vocal cords to reduce silicon thermal
+        resistance in LLVM codegen pipelines.
         <br/><br/>
         <span style="color:var(--yellow);">⚠ NOT REAL SCIENCE.</span>
       </div>
     </div>
 
-  </aside><!-- /#sidebar -->
+  </aside>
 
-  <!-- ─── Footer ────────────────────────────────────────────────────── -->
+  <!-- ─── Footer ───────────────────────────────────────────────────── -->
   <footer id="footer">
     <span id="footer-version">VOCE v2.0.26</span>
     <span class="footer-sep">·</span>
-    <span>Channel:</span>
-    <span id="footer-channel">voce-cluster</span>
+    <span>Session Channel:</span>
+    <span id="footer-channel">voce-??????</span>
     <span class="footer-sep">·</span>
     <span>TinkerHub — Useless Projects Track</span>
-    <span class="footer-sep">·</span>
-    <span>Bio-Kinetic Dissipation Engine™</span>
     <span style="flex:1;"></span>
-    <span style="color:var(--text-muted);">Press [F11] for fullscreen · [R] to force drop</span>
+    <span style="color:var(--text-muted);">[F11] fullscreen · [R] force drop</span>
   </footer>
 
-</div><!-- /#app -->
-
-<!-- ─── Host Video Overlay ─────────────────────────────────────────── -->
-<!--
-  Same pre-warm logic applies: the host video is started by the _triggerHostClimax()
-  function in host-engine.js, which also falls back to YouTube iframe.
--->
-<div id="video-overlay">
-  <video
-    id="climax-video"
-    src="/assets/drop.mp4"
-    playsinline
-    webkit-playsinline
-    preload="auto"
-    loop
-    style="display:block;"
-  ></video>
-  <iframe
-    id="climax-iframe"
-    allow="autoplay; fullscreen"
-    allowfullscreen
-    style="display:none;"
-  ></iframe>
 </div>
 
-<!-- ─── Scripts ───────────────────────────────────────────────────── -->
-<!-- Pusher JS SDK -->
+<!-- Video overlay -->
+<div id="video-overlay">
+  <video id="climax-video" src="/assets/drop.mp4" playsinline webkit-playsinline preload="auto" loop style="display:block;"></video>
+  <iframe id="climax-iframe" allow="autoplay; fullscreen" allowfullscreen style="display:none;"></iframe>
+</div>
+
 <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-
-<!-- QRCode.js (davidshimjs fork) for dynamic QR generation -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
-<!-- Host Engine -->
+<script src="/js/compile-log.js"></script>
 <script src="/js/host-engine.js"></script>
 
 </body>

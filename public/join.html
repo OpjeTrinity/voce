@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#051a08" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>VOCE CLUSTER — Join Session</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="/css/mobile.css" />
+
+  <script>
+    window.VOCE_CONFIG = {
+      pusherKey:     '47e151f45ca4133666d8',
+      pusherCluster: 'ap2',
+    };
+  </script>
+</head>
+<body>
+
+  <div id="app-card">
+
+    <div id="logo-row">
+      <div id="logo-icon">🔊</div>
+      <div id="logo-name">VOCE</div>
+      <div id="logo-sub">Bio-Kinetic Compiler Node</div>
+    </div>
+
+    <!-- Session ID display -->
+    <div id="session-label" style="
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.15em;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px;
+      padding: 5px 12px;
+    ">SESSION: —</div>
+
+    <div id="status-badge">
+      <span id="status-dot"></span>
+      <span id="status-text">STANDBY — TAP TO JOIN</span>
+    </div>
+
+    <button id="connect-btn" type="button">
+      ⚡ CONNECT TO COMPILER ARRAY
+    </button>
+
+    <div id="meter-section">
+      <div id="meter-label-row">
+        <span id="meter-label">ACOUSTIC INPUT</span>
+        <span id="meter-db">-∞</span>
+      </div>
+      <div id="meter-track">
+        <div id="meter-fill"></div>
+      </div>
+      <div id="vu-ticks">
+        <span class="vu-tick"></span><span class="vu-tick"></span>
+        <span class="vu-tick"></span><span class="vu-tick"></span>
+        <span class="vu-tick"></span><span class="vu-tick"></span>
+        <span class="vu-tick"></span><span class="vu-tick"></span>
+        <span class="vu-tick"></span><span class="vu-tick"></span>
+        <span class="vu-tick"></span><span class="vu-tick"></span>
+        <span class="vu-tick"></span><span class="vu-tick"></span>
+        <span class="vu-tick"></span><span class="vu-tick"></span>
+        <span class="vu-tick"></span><span class="vu-tick"></span>
+        <span class="vu-tick"></span><span class="vu-tick"></span>
+      </div>
+    </div>
+
+    <div id="scream-prompt">
+      <div id="scream-emoji">📢</div>
+      <div id="scream-text">SCREAM NOW!</div>
+      <div id="scream-sub">THERMAL BOTTLENECK — ACOUSTIC OVERRIDE REQUIRED</div>
+    </div>
+
+    <div id="node-id">NODE-XXXXX</div>
+
+  </div>
+
+  <div id="error-toast"></div>
+
+  <div id="video-overlay">
+    <video
+      id="climax-video"
+      src="/assets/drop.mp4"
+      playsinline
+      webkit-playsinline
+      preload="auto"
+      loop
+      style="display:block;"
+    ></video>
+    <iframe
+      id="climax-iframe"
+      allow="autoplay; fullscreen"
+      allowfullscreen
+      style="display:none;"
+    ></iframe>
+  </div>
+
+  <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+  <script src="/js/audio-node.js"></script>
+  <script src="/js/mobile-client.js"></script>
+
+</body>
+</html>

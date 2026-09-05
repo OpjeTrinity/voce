@@ -83,12 +83,12 @@ body::after {
 #app {
   display: grid;
   grid-template-columns: 1fr 340px;
-  grid-template-rows: 56px 1fr 160px 44px;
+  grid-template-rows: 56px 1fr 220px 44px;
   grid-template-areas:
-    "header  header"
-    "main    sidebar"
-    "log     sidebar"
-    "footer  footer";
+    "header   header"
+    "main     sidebar"
+    "terminal sidebar"
+    "footer   footer";
   height: 100vh;
   gap: 1px;
   background: var(--border);
@@ -371,55 +371,131 @@ body::after {
   box-shadow: 0 0 8px var(--red-glow);
 }
 
-/* ─── Log Panel ────────────────────────────────────────────────────── */
-#log {
-  grid-area: log;
-  background: var(--bg-container);
+/* ─── Terminal Panel ───────────────────────────────────────────────── */
+#terminal-panel {
+  grid-area: terminal;
+  background: #010409;
   border-top: 1px solid var(--border);
-  padding: 10px 16px;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  overflow: hidden;
+  font-family: var(--font-mono);
 }
 
-#log-header {
+#terminal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 14px;
+  background: var(--bg-container);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+#terminal-title {
+  font-size: 11px;
+  color: var(--green);
+  font-weight: 600;
+}
+
+#terminal-lines-count {
   font-size: 10px;
   color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 4px;
 }
 
+#terminal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+#terminal-body::-webkit-scrollbar { width: 4px; }
+#terminal-body::-webkit-scrollbar-track { background: transparent; }
+#terminal-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+#terminal-cursor-row {
+  padding: 2px 14px 6px;
+  flex-shrink: 0;
+}
+
+#terminal-cursor {
+  color: var(--green);
+  animation: blink-cursor 1s step-start infinite;
+  font-size: 12px;
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Terminal line styles */
+.term-line {
+  font-size: 11px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-all;
+  animation: term-fade-in 80ms ease;
+}
+
+@keyframes term-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.term-blank  { height: 6px; }
+.term-dim    { color: var(--text-muted); }
+.term-normal { color: var(--text-primary); }
+.term-cmd    { color: var(--cyan); }
+.term-llvm   { color: #a78bfa; }   /* purple */
+.term-opt    { color: #60a5fa; }   /* blue */
+.term-nvcc   { color: #34d399; }   /* teal */
+.term-linker { color: #fb923c; }   /* orange */
+.term-codegen{ color: var(--text-primary); }
+.term-warn   { color: var(--yellow); }
+.term-stall  { color: var(--red); animation: flash-text 0.8s step-start infinite; }
+.term-error  { color: var(--red); font-weight: 700; }
+.term-banner { color: var(--green); font-weight: 700; }
+.term-success{ color: var(--green); font-weight: 700; text-shadow: 0 0 10px var(--green-glow); }
+
+/* ─── Old Log Panel (kept for reference, hidden) ───────────────────── */
+#log { display: none; }
+
+/* Log entry styles (used in sidebar system log) */
 #log-entries {
   display: flex;
   flex-direction: column;
   gap: 2px;
   overflow: hidden;
-  flex: 1;
+  max-height: 90px;
 }
 
 .log-entry {
   display: flex;
-  gap: 10px;
-  font-size: 11px;
-  line-height: 1.5;
+  gap: 8px;
+  font-size: 10px;
+  line-height: 1.4;
   opacity: 0;
   animation: fade-in-log 200ms ease forwards;
 }
 
 @keyframes fade-in-log {
-  from { opacity: 0; transform: translateY(4px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
-.log-ts   { color: var(--text-muted); flex-shrink: 0; }
-.log-tag  { flex-shrink: 0; font-weight: 600; }
-.log-tag.info  { color: var(--cyan); }
-.log-tag.ok    { color: var(--green); }
-.log-tag.warn  { color: var(--yellow); }
-.log-tag.err   { color: var(--red); }
-.log-msg  { color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.log-ts  { color: var(--text-muted); flex-shrink: 0; }
+.log-tag { flex-shrink: 0; font-weight: 600; }
+.log-tag.info { color: var(--cyan); }
+.log-tag.ok   { color: var(--green); }
+.log-tag.warn { color: var(--yellow); }
+.log-tag.err  { color: var(--red); }
+.log-msg { color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
 
 /* ─── Sidebar ──────────────────────────────────────────────────────── */
 #sidebar {
