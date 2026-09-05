@@ -1,0 +1,12 @@
+{
+  "name": "voce-engine",
+  "version": "2.0.26",
+  "description": "Voice-Overclocked Compilation Engine — Distributed Bio-Kinetic Compiler Orchestrator",
+  "main": "api/pulse.js",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "pusher": "^5.2.0"
+  }
+}

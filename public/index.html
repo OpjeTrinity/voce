@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#051a08" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="description" content="VOCE Cluster — Link your phone as a distributed acoustic compiler node." />
+
+  <title>VOCE CLUSTER — Link Node</title>
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link rel="stylesheet" href="/css/mobile.css" />
+
+  <!--
+    ╔══════════════════════════════════════════════════════════╗
+    ║  PUSHER CONFIGURATION                                    ║
+    ║  Replace with your actual Pusher App Key and Cluster    ║
+    ╚══════════════════════════════════════════════════════════╝
+  -->
+  <script>
+    window.VOCE_CONFIG = {
+      pusherKey:     '47e151f45ca4133666d8',     // ← Replace this
+      pusherCluster: 'ap2', // ← e.g. 'ap2', 'eu', 'us2'
+    };
+  </script>
+</head>
+<body>
+
+  <!-- ─── Main App Card ─────────────────────────────────────────────── -->
+  <div id="app-card">
+
+    <!-- Logo -->
+    <div id="logo-row">
+      <div id="logo-icon">🔊</div>
+      <div id="logo-name">VOCE</div>
+      <div id="logo-sub">Bio-Kinetic Compiler Node</div>
+    </div>
+
+    <!-- Status Badge -->
+    <div id="status-badge">
+      <span id="status-dot"></span>
+      <span id="status-text">STANDBY — TAP TO JOIN</span>
+    </div>
+
+    <!-- Connect Button — primary user gesture entry point -->
+    <button id="connect-btn" type="button">
+      ⚡ CONNECT TO COMPILER ARRAY
+    </button>
+
+    <!-- Acoustic Meter — hidden until node is active -->
+    <div id="meter-section">
+      <div id="meter-label-row">
+        <span id="meter-label">ACOUSTIC INPUT</span>
+        <span id="meter-db">-∞</span>
+      </div>
+      <div id="meter-track">
+        <div id="meter-fill"></div>
+      </div>
+      <div id="vu-ticks">
+        <!-- 20 VU tick bars — lit by JS -->
+        <span class="vu-tick"></span>
+        <span class="vu-tick"></span>
+        <span class="vu-tick"></span>
+        <span class="vu-tick"></span>
+        <span class="vu-tick"></span>
+        <span class="vu-tick"></span>
+        <span class="vu-tick"></span>
+        <span class="vu-tick"></span>
+        <span class="vu-tick"></span>
+        <span class="vu-tick"></span>
+        <span class="vu-tick"></span>
+        <span class="vu-tick"></span>
+        <span class="vu-tick"></span>
+        <span class="vu-tick"></span>
+        <span class="vu-tick"></span>
+        <span class="vu-tick"></span>
+        <span class="vu-tick"></span>
+        <span class="vu-tick"></span>
+        <span class="vu-tick"></span>
+        <span class="vu-tick"></span>
+      </div>
+    </div>
+
+    <!-- Overclock Scream Prompt — shown during bottleneck event -->
+    <div id="scream-prompt">
+      <div id="scream-emoji">📢</div>
+      <div id="scream-text">SCREAM NOW!</div>
+      <div id="scream-sub">THERMAL BOTTLENECK ACTIVE — OVERCLOCKING</div>
+    </div>
+
+    <!-- Node ID display -->
+    <div id="node-id">NODE-XXXXX</div>
+
+  </div><!-- /#app-card -->
+
+  <!-- Error Toast -->
+  <div id="error-toast"></div>
+
+  <!-- ─── Climax Video Overlay ───────────────────────────────────────── -->
+  <!--
+    IMPORTANT: climax-video must have a src pointing to your drop.mp4
+    OR you can rely on the YouTube iframe fallback (activated if src is empty).
+
+    If you have a local video, place it in /assets/drop.mp4 and set:
+      <video id="climax-video" src="/assets/drop.mp4" ...>
+
+    The pre-warming trick (play+pause in the connect handler) marks this element
+    as user-activated, so the later programmatic play() from the WebSocket event
+    will bypass the mobile autoplay block.
+  -->
+  <div id="video-overlay">
+    <video
+      id="climax-video"
+      src="/assets/drop.mp4"
+      playsinline
+      webkit-playsinline
+      preload="auto"
+      loop
+      style="display:block;"
+    ></video>
+    <iframe
+      id="climax-iframe"
+      allow="autoplay; fullscreen"
+      allowfullscreen
+      style="display:none;"
+    ></iframe>
+  </div>
+
+  <!-- ─── Scripts ───────────────────────────────────────────────────── -->
+  <!-- Pusher JS SDK via CDN -->
+  <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+
+  <!-- Audio Node module (must load before mobile-client) -->
+  <script src="/js/audio-node.js"></script>
+
+  <!-- Mobile Client Controller -->
+  <script src="/js/mobile-client.js"></script>
+
+</body>
+</html>
